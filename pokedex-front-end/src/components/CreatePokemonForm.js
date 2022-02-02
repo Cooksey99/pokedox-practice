@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { getPokemonTypes } from '../store/pokemon';
+import { addPokemon } from '../store/pokemon';
 
 const CreatePokemonForm = ({ hideForm }) => {
   const pokeTypes = useSelector(state => state.pokemon.types);
@@ -29,6 +30,7 @@ const CreatePokemonForm = ({ hideForm }) => {
     dispatch(getPokemonTypes());
   }, [dispatch]);
 
+
   useEffect(() => {
     if (pokeTypes.length && !type) {
       setType(pokeTypes[0]);
@@ -50,9 +52,21 @@ const CreatePokemonForm = ({ hideForm }) => {
     //   moves: [move1, move2]
     // };
 
-    let createdPokemon;
-    if (createdPokemon) {
-      history.push(`/pokemon/${createdPokemon.id}`);
+    let createdPokemon = {
+        number,
+        attack,
+        defense,
+        imageUrl,
+        name,
+        type,
+        move1,
+        move2,
+        moves: [move1, move2]
+    };
+    
+    const pokemon = await dispatch(addPokemon(createdPokemon));
+    if (pokemon) {
+      history.push(`/pokemon/${pokemon.id}`);
       hideForm();
     }
   };
