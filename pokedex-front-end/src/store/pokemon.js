@@ -19,6 +19,16 @@ const addOnePokemon = pokemon => ({
   pokemon
 });
 
+export const getOnePokemon = (p) => async dispatch=> {
+
+  const response = await fetch(`/api/pokemon/${p}`);
+
+  if(response.ok){
+    const pokemon = await response.json();
+    dispatch(addOnePokemon(pokemon))
+  }
+}
+
 export const getPokemon = () => async dispatch => {
   const response = await fetch(`/api/pokemon`);
   
@@ -26,7 +36,6 @@ export const getPokemon = () => async dispatch => {
     const list = await response.json();
     dispatch(load(list));
   }
-  
 };
 
 export const getPokemonTypes = () => async dispatch => {
