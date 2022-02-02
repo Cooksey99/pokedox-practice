@@ -21,11 +21,12 @@ const addOnePokemon = pokemon => ({
 
 export const getPokemon = () => async dispatch => {
   const response = await fetch(`/api/pokemon`);
-
+  
   if (response.ok) {
     const list = await response.json();
     dispatch(load(list));
   }
+  
 };
 
 export const getPokemonTypes = () => async dispatch => {
