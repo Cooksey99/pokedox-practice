@@ -23,7 +23,7 @@ const ItemForm = ({ itemId, hideForm }) => {
       price
     };
     
-    let returnedItem = await dispatch(editItem(payload));
+    let returnedItem = await dispatch(editItem(payload))
     console.log(returnedItem)
     if (returnedItem) {
       hideForm();

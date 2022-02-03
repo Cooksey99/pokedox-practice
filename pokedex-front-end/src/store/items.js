@@ -26,7 +26,7 @@ const update = (item) => ({
 });
 
 export const editItem = (payload) => async dispatch => {
-  const response = await fetch(`/api/pokemon/${payload.id}/items`,{
+  const response = await fetch(`/api/items/${payload.id}`,{
     method:"PUT",
     headers: {"Content-Type": "application/json"},
     body: JSON.stringify(payload)
