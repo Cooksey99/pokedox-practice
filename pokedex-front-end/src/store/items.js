@@ -9,10 +9,36 @@ const load = (items, pokemonId) => ({
   pokemonId
 });
 
+export const getItem = (id) => async dispatch => {
+  // console.log(pokemon.id)
+  const response = await fetch(`/api/pokemon/${id}/items`);
+  
+  if (response.ok) {
+    const items = await response.json();
+    dispatch(load(items, id));
+    return items;
+  }
+};
+
 const update = (item) => ({
   type: UPDATE_ITEM,
   item
 });
+
+export const editItem = (payload) => async dispatch => {
+  const response = await fetch(`/api/pokemon/${payload.id}/items`,{
+    method:"PUT",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(payload)
+  });
+
+  if (response.ok) {
+    const item = await response.json();
+    dispatch(update(item));
+    return item;
+  }
+};
+
 
 const add = (item) => ({
   type: ADD_ITEM,

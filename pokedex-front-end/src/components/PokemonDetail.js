@@ -15,6 +15,7 @@ const PokemonDetail = () => {
   const dispatch = useDispatch();
 
   useEffect(()=>{
+    console.log(pokemon)
     dispatch(getOnePokemon(pokemonId))
   },[pokemonId])
 
